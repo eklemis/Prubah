@@ -6,6 +6,8 @@ async function authorizationHandle({ event, resolve }: { event: RequestEvent; re
 	// Protect any routes under /authenticated
 	if (event.url.pathname.startsWith('/authenticated')) {
 		const session = await event.locals.auth();
+		console.log('session info:' + session?.user?.name);
+
 		if (!session) {
 			// Redirect to the signin page
 			throw redirect(303, '/auth/signin');
